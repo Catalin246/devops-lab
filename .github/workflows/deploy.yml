@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'github-pages-deployment/index.html'  # Only trigger on changes to this file
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: main            # The branch to deploy to
+          folder: github-pages-deployment  # The folder containing your index.html
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
